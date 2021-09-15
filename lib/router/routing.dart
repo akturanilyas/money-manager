@@ -1,7 +1,6 @@
-import 'package:bloctest/bloc/screen/bloc/screen_bloc.dart';
+import 'package:bloctest/bloc/screen/bloc/bottom_navigation_bloc.dart';
 import 'package:bloctest/bloc/test_bloc.dart';
 import 'package:bloctest/ui/home.dart';
-import 'package:bloctest/ui/second_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,19 +17,19 @@ class AppRouter {
                 value: _testBloc,
               ),
               BlocProvider(
-                create: (context) => ScreenBloc(),
+                create: (context) => BottomNavigationBloc()..add(AppStarted()),
               ),
             ],
             child: Home(),
           ),
         );
-      case '/second':
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: _testBloc,
-            child: SecondPage(),
-          ),
-        );
+      // case '/second':
+      //   return MaterialPageRoute(
+      //     builder: (_) => BlocProvider.value(
+      //       value: _testBloc,
+      //       child: SecondPage(),
+      //     ),
+      //   );
       default:
         return null;
     }

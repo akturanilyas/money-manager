@@ -1,4 +1,7 @@
-import 'package:bloctest/bloc/screen/bloc/screen_bloc.dart';
+import 'package:bloctest/bloc/screen/bloc/bottom_navigation_bloc.dart';
+import 'package:bloctest/widget/analysis_screen.dart';
+import 'package:bloctest/widget/income_screen.dart';
+import 'package:bloctest/widget/spend_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,40 +19,47 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final ScreenBloc screenBloc = BlocProvider.of<ScreenBloc>(context);
-    int value = BlocProvider.of<ScreenBloc>(context).state.index;
-
-    final BottomNavigationBar bottomNavBar = BottomNavigationBar(
-      currentIndex: value,
-      elevation: 1,
-      onTap: (index) {
-        screenBloc.add(ChangeScreenEvent(index));
-      },
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.money_off),
-          label: "Spending",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.attach_money),
-          label: "Income",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.view_column),
-          label: "Analysis",
-        ),
-      ],
-    );
-
     // final TestBloctestBloc = BlocProvider.of<TestBloc>(context);
-    return BlocBuilder<ScreenBloc, ScreenState>(
+    return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(state.screen.toString()),
+              // title: Text(state.screen.toString()),
+              ),
+          body: Builder(
+            builder: (BuildContext context) {
+              if (state is PageLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (state is SpendPageLoaded) return SpendScreen();
+              if (state is IncomePageLoaded) return IncomeScreen();
+              if (state is AnalysisPageLoaded) return AnalysisScreen();
+              return Container();
+            },
           ),
-          body: state.screen,
-          bottomNavigationBar: bottomNavBar,
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: context
+                .select((BottomNavigationBloc bloc) => bloc.currentIndex),
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.money_off),
+                label: "Spending",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.attach_money),
+                label: "Income",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.view_column),
+                label: "Analysis",
+              ),
+            ],
+            onTap: (index) {
+              context
+                  .read<BottomNavigationBloc>()
+                  .add(PageTapped(index: index));
+            },
+          ),
         );
       },
     );

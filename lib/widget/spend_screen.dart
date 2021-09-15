@@ -1,4 +1,3 @@
-import 'package:bloctest/bloc/screen/bloc/screen_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,11 +15,6 @@ class _SpendScreenState extends State<SpendScreen> {
       child: Column(
         children: [
           Text('Spend Screen'),
-          BlocBuilder<ScreenBloc, ScreenState>(
-            builder: (context, state) {
-              return Text(state.counter.toString());
-            },
-          )
         ],
       ),
     );
