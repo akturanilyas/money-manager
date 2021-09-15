@@ -5,29 +5,48 @@ import 'package:bloctest/widget/spend_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Home extends StatefulWidget {
-  const Home({
+class Root extends StatefulWidget {
+  const Root({
     Key? key,
   }) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _RootState createState() => _RootState();
 }
 
-class _HomeState extends State<Home> {
+class _RootState extends State<Root> {
   //final int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final Color primaryColor = Colors.blueAccent;
+    final Color secondaryColor = Colors.white;
     // final TestBloctestBloc = BlocProvider.of<TestBloc>(context);
     return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-              // title: Text(state.screen.toString()),
-              ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/new');
+                },
+                icon: Icon(Icons.add),
+              )
+            ],
+            centerTitle: true,
+            backgroundColor: primaryColor,
+            title: Builder(
+              builder: (_) {
+                if (state is SpendPageLoaded) return Text('Spending Page');
+                if (state is IncomePageLoaded) return Text('Incoming Page');
+                if (state is AnalysisPageLoaded) return Text('Analysis Page');
+                return Text('Loading');
+              },
+            ),
+          ),
           body: Builder(
-            builder: (BuildContext context) {
+            builder: (_) {
               if (state is PageLoading) {
                 return Center(child: CircularProgressIndicator());
               }
@@ -38,6 +57,10 @@ class _HomeState extends State<Home> {
             },
           ),
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: primaryColor,
+            selectedItemColor: secondaryColor,
+            unselectedItemColor: secondaryColor,
+            showUnselectedLabels: false,
             currentIndex: context
                 .select((BottomNavigationBloc bloc) => bloc.currentIndex),
             items: [
@@ -55,9 +78,9 @@ class _HomeState extends State<Home> {
               ),
             ],
             onTap: (index) {
-              context
-                  .read<BottomNavigationBloc>()
-                  .add(PageTapped(index: index));
+              context.read<BottomNavigationBloc>().add(
+                    PageTapped(index: index),
+                  );
             },
           ),
         );
