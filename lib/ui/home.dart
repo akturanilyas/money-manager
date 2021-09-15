@@ -17,10 +17,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final ScreenBloc screenBloc = BlocProvider.of<ScreenBloc>(context);
+    int value = BlocProvider.of<ScreenBloc>(context).state.index;
+
     final BottomNavigationBar bottomNavBar = BottomNavigationBar(
-      currentIndex: screenBloc.state.index,
+      currentIndex: value,
+      elevation: 1,
       onTap: (index) {
-        print(screenBloc.state.index);
         screenBloc.add(ChangeScreenEvent(index));
       },
       items: [

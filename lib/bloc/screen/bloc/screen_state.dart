@@ -1,6 +1,5 @@
 part of 'screen_bloc.dart';
 
-// ignore: must_be_immutable
 class ScreenState extends Equatable {
   final counter;
   final int index;

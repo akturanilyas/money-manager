@@ -19,51 +19,28 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
     ScreenEvent event,
   ) async* {
     if (event is ChangeScreenEvent) {
-      if (event.index == 0) {
-        yield ScreenState(
-            counter: state.counter + 1,
-            index: event.index,
-            screen: SpendScreen());
-        print(state.index);
+      switch (event.index) {
+        case 0:
+          yield ScreenState(
+              counter: state.counter + 1,
+              index: event.index,
+              screen: SpendScreen());
+          break;
+        case 1:
+          yield ScreenState(
+              counter: state.counter + 1,
+              index: event.index,
+              screen: IncomeScreen());
+          break;
+        case 2:
+          yield ScreenState(
+              counter: state.counter + 1,
+              index: event.index,
+              screen: AnalysisScreen());
+          break;
+        default:
+          break; // ignore
       }
-      if (event.index == 1) {
-        yield ScreenState(
-            counter: state.counter + 1,
-            index: event.index,
-            screen: IncomeScreen());
-        print(state.index);
-      }
-
-      if (event.index == 2) {
-        yield ScreenState(
-            counter: state.counter + 1,
-            index: event.index,
-            screen: AnalysisScreen());
-        print(state.index);
-      }
-
-      // switch (event.index) {
-      //   case 0:
-      //     yield ScreenState(
-      //         counter: state.counter + 1,
-      //         index: event.index,
-      //         screen: SpendScreen());
-      //     break;
-      //   case 1:
-      //     yield ScreenState(
-      //         counter: state.counter + 1,
-      //         index: event.index,
-      //         screen: IncomeScreen());
-      //     break;
-      //   case 2:
-      //     yield ScreenState(
-      //         counter: state.counter + 1,
-      //         index: event.index,
-      //         screen: AnalysisScreen());
-      //     break;
-      //   default:
-      //     break; // ignore
-      // }
     } else if (event is Empty) {}
   }
 }
