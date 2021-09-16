@@ -1,12 +1,14 @@
-import 'package:bloctest/bloc/screen/bloc/bottom_navigation_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc_observer.dart';
 import 'router/routing.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

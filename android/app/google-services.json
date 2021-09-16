@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "109883364539",
+    "project_id": "money-manager-by-akturan",
+    "storage_bucket": "money-manager-by-akturan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109883364539:android:37c92bee91aaa14df4859e",
+        "android_client_info": {
+          "package_name": "com.example.shoppingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109883364539-a1gk065qfutl8bd6mop5otlopa3s01dg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHzMxUidpNwMoYLeMhcRBWtVzg0mssBOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109883364539-a1gk065qfutl8bd6mop5otlopa3s01dg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -28,7 +28,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => _testBloc,
-            child: NewEntry(),
+            child: NewEntryPage(),
           ),
         );
 

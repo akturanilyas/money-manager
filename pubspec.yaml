@@ -22,8 +22,11 @@ environment:
 
 dependencies:
   bloc: ^7.1.0
+  cloud_firestore: ^2.5.2
   cupertino_icons: ^1.0.2
   equatable: ^2.0.3
+  firebase_core: ^1.6.0
+  firebase_database: ^7.2.2
   flutter:
     sdk: flutter
   flutter_bloc: ^7.2.0
