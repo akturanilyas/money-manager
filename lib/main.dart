@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
     final AppRouter _appRouter = AppRouter();
 
     return MaterialApp(
+      // showPerformanceOverlay: true,
       onGenerateRoute: _appRouter.onGenerateRoute,
     );
   }

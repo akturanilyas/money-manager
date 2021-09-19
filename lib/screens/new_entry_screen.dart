@@ -39,70 +39,77 @@ class _NewEntryPageState extends State<NewEntryPage> {
         title: Text('New Entry'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Wrap(
-          runSpacing: 50,
-          alignment: WrapAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            TextFormField(
-              controller: nameController,
-              decoration: InputDecoration(
-                icon: Icon(Icons.text_format),
-                labelText: 'Describe a name',
-                // labelStyle: theme.textTheme.headline1),
+      body: _fields(phoneSize, context),
+    );
+  }
+
+  Padding _fields(Size phoneSize, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Wrap(
+        runSpacing: 50,
+        alignment: WrapAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          TextFormField(
+            controller: nameController,
+            decoration: InputDecoration(
+              icon: Icon(Icons.text_format),
+              labelText: 'Describe a name',
+              // labelStyle: theme.textTheme.headline1),
+            ),
+          ),
+          TextFormField(
+            keyboardType: TextInputType.number,
+            controller: valueController,
+            decoration: InputDecoration(
+              icon: Icon(Icons.attach_money),
+              labelText: 'Enter to cost',
+              // labelStyle: theme.textTheme.headline1),
+            ),
+          ),
+          LabeledSwitch(
+            label: 'Status',
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: _isSelected,
+            onChanged: (bool newValue) {
+              setState(() {
+                _isSelected = newValue;
+              });
+            },
+          ),
+          TextButton(
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all(ThemeConstants.primaryColor),
+              minimumSize: MaterialStateProperty.all(
+                Size(
+                  phoneSize.height * .15,
+                  phoneSize.width * .12,
+                ),
+              ),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
               ),
             ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              controller: valueController,
-              decoration: InputDecoration(
-                icon: Icon(Icons.attach_money),
-                labelText: 'Enter to cost',
-                // labelStyle: theme.textTheme.headline1),
-              ),
+            child: Text(
+              'Save',
+              style: TextStyle(color: ThemeConstants.selectedItemColor),
             ),
-            LabeledSwitch(
-              label: 'Status',
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              value: _isSelected,
-              onChanged: (bool newValue) {
-                setState(() {
-                  _isSelected = newValue;
-                });
-              },
-            ),
-            TextButton(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
-                  minimumSize: MaterialStateProperty.all(
-                    Size(
-                      phoneSize.height * .15,
-                      phoneSize.width * .12,
-                    ),
-                  ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  )),
-              child: Text(
-                'Save',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                context.read<FirestoreBloc>().add(CreatedButtonTapped(
-                    created: DateTime.now(),
-                    imageUrl:
-                        'https://media.gettyimages.com/photos/blue-mosque-in-istanbul-picture-id160193420?s=612x612',
-                    name: nameController.text,
-                    status: _isSelected,
-                    value: double.parse(valueController.text)));
-              },
-            )
-          ],
-        ),
+            onPressed: () {
+              context.read<FirestoreBloc>().add(CreatedButtonTapped(
+                  created: DateTime.now(),
+                  // TODO! Refactor there
+                  imageUrl:
+                      'https://media.gettyimages.com/photos/blue-mosque-in-istanbul-picture-id160193420?s=612x612',
+                  name: nameController.text,
+                  status: _isSelected,
+                  value: double.parse(valueController.text)));
+            },
+          )
+        ],
       ),
     );
   }
