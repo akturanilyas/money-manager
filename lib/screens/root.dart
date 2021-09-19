@@ -1,6 +1,6 @@
 import 'package:bloctest/bloc/bottom_navigation/bottom_navigation_bloc.dart';
-import 'package:bloctest/ui/analysis_screen.dart';
-import 'package:bloctest/ui/spend_screen.dart';
+import 'package:bloctest/screens/analysis_screen.dart';
+import 'package:bloctest/screens/spend_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

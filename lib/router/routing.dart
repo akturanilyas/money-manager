@@ -1,7 +1,7 @@
 import 'package:bloctest/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:bloctest/bloc/test_bloc.dart';
-import 'package:bloctest/ui/new_entry_screen.dart';
-import 'package:bloctest/ui/root.dart';
+import 'package:bloctest/screens/new_entry_screen.dart';
+import 'package:bloctest/screens/root.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
