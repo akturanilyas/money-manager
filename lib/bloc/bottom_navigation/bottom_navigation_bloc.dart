@@ -26,7 +26,7 @@ class BottomNavigationBloc
         // ! We can add there local data fetch or something
         // ! String data = await _getFirstPageData(); like that
         // ! and add a fetch functin to bottom of this class.
-        yield SpendPageLoaded(text: "SpendPage");
+        yield SpendPageLoaded(text: 'SpendPage');
       } else if (this.currentIndex == 1) {
         yield AnalysisPageLoaded(text: 'AnalysisPage');
       }
