@@ -1,4 +1,5 @@
 import 'package:bloctest/bloc/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:bloctest/bloc/firestore/firestore_bloc.dart';
 import 'package:bloctest/screens/analysis_screen.dart';
 import 'package:bloctest/screens/spend_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,17 @@ class Root extends StatefulWidget {
 }
 
 class _RootState extends State<Root> {
-  //final int _currentIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Colors.blueAccent;
-    final Color secondaryColor = Colors.white;
-    final Color selectedItemColor = Colors.lightGreenAccent;
+    final Color secondaryColor = Colors.white54;
+    final Color selectedItemColor = Colors.white;
+    context.read<FirestoreBloc>().add(GetExchanges());
     // final TestBloctestBloc = BlocProvider.of<TestBloc>(context);
     return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
       builder: (context, state) {
@@ -73,9 +78,9 @@ class _RootState extends State<Root> {
               ),
             ],
             onTap: (index) {
-              context.read<BottomNavigationBloc>().add(
-                    PageTapped(index: index),
-                  );
+              context
+                  .read<BottomNavigationBloc>()
+                  .add(PageTapped(index: index));
             },
           ),
         );

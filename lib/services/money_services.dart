@@ -20,7 +20,12 @@ class MoneyService {
         querySnapshot.docs.forEach(
           (result) {
             encodedExchange = json.encode(result.data());
-            encodedExchange = encodedExchange + "id:" + result.id;
+            if (encodedExchange != null && encodedExchange.length > 0) {
+              encodedExchange =
+                  encodedExchange.substring(0, encodedExchange.length - 1);
+            }
+            encodedExchange = encodedExchange + ',"id":"${result.id}"}';
+            print(encodedExchange);
             exchanges.add(MoneyExchange.fromJson(encodedExchange));
           },
         );

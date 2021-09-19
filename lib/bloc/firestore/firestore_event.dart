@@ -11,11 +11,22 @@ class CreatedButtonTapped extends FirestoreEvent {
   final String name;
   final double value;
   final bool status;
+  final DateTime created;
+  final String imageUrl;
 
-  CreatedButtonTapped(
-      {required this.name, required this.value, required this.status});
+  CreatedButtonTapped({
+    required this.name,
+    required this.value,
+    required this.status,
+    required this.created,
+    required this.imageUrl,
+  });
   @override
   String toString() => 'Name: $name, value: $value, status: $status';
+}
+
+class GetExchanges extends FirestoreEvent {
+  String toString() => 'Exchanges geted';
 }
 
 class EditButtonTapped extends FirestoreEvent {

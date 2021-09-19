@@ -1,4 +1,5 @@
 import 'package:bloctest/bloc/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:bloctest/bloc/firestore/firestore_bloc.dart';
 import 'package:bloctest/bloc/test_bloc.dart';
 import 'package:bloctest/screens/new_entry_screen.dart';
 import 'package:bloctest/screens/root.dart';
@@ -20,14 +21,17 @@ class AppRouter {
               BlocProvider(
                 create: (context) => BottomNavigationBloc()..add(AppStarted()),
               ),
+              BlocProvider.value(
+                value: FirestoreBloc(),
+              ),
             ],
             child: Root(),
           ),
         );
       case '/new':
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => _testBloc,
+          builder: (_) => BlocProvider.value(
+            value: FirestoreBloc(),
             child: NewEntryPage(),
           ),
         );

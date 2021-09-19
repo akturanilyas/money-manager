@@ -9,6 +9,13 @@ abstract class FirestoreState extends Equatable {
 
 class FirestoreInitial extends FirestoreState {}
 
+class ExchangesGetted extends FirestoreState {
+  List<MoneyExchange> exchanges = <MoneyExchange>[];
+  ExchangesGetted(this.exchanges);
+  @override
+  String toString() => "Exchanges getted";
+}
+
 class Loading extends FirestoreState {
   @override
   String toString() => 'Loading...';
