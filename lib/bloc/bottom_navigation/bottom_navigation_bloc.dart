@@ -28,8 +28,6 @@ class BottomNavigationBloc
         // ! and add a fetch functin to bottom of this class.
         yield SpendPageLoaded(text: "SpendPage");
       } else if (this.currentIndex == 1) {
-        yield IncomePageLoaded(text: "IncomePage");
-      } else if (this.currentIndex == 2) {
         yield AnalysisPageLoaded(text: 'AnalysisPage');
       }
     }

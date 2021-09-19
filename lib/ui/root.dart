@@ -1,7 +1,6 @@
-import 'package:bloctest/bloc/screen/bloc/bottom_navigation_bloc.dart';
-import 'package:bloctest/widget/analysis_screen.dart';
-import 'package:bloctest/widget/income_screen.dart';
-import 'package:bloctest/widget/spend_screen.dart';
+import 'package:bloctest/bloc/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:bloctest/ui/analysis_screen.dart';
+import 'package:bloctest/ui/spend_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +20,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     final Color primaryColor = Colors.blueAccent;
     final Color secondaryColor = Colors.white;
+    final Color selectedItemColor = Colors.lightGreenAccent;
     // final TestBloctestBloc = BlocProvider.of<TestBloc>(context);
     return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
       builder: (context, state) {
@@ -39,7 +39,6 @@ class _RootState extends State<Root> {
             title: Builder(
               builder: (_) {
                 if (state is SpendPageLoaded) return Text('Spending Page');
-                if (state is IncomePageLoaded) return Text('Incoming Page');
                 if (state is AnalysisPageLoaded) return Text('Analysis Page');
                 return Text('Loading');
               },
@@ -51,29 +50,25 @@ class _RootState extends State<Root> {
                 return Center(child: CircularProgressIndicator());
               }
               if (state is SpendPageLoaded) return SpendScreen();
-              if (state is IncomePageLoaded) return IncomeScreen();
               if (state is AnalysisPageLoaded) return AnalysisScreen();
               return Container();
             },
           ),
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: primaryColor,
-            selectedItemColor: secondaryColor,
+
+            selectedItemColor: selectedItemColor,
             unselectedItemColor: secondaryColor,
-            showUnselectedLabels: false,
+            // showUnselectedLabels: false,
             currentIndex: context
                 .select((BottomNavigationBloc bloc) => bloc.currentIndex),
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.money_off),
+                icon: Icon(Icons.attach_money_outlined),
                 label: "Spending",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.attach_money),
-                label: "Income",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.view_column),
+                icon: Icon(Icons.auto_graph),
                 label: "Analysis",
               ),
             ],

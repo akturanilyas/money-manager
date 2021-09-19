@@ -1,7 +1,7 @@
+import 'package:bloctest/widget/labeled_switch.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
 class NewEntryPage extends StatefulWidget {
   static const path = "/new";
@@ -12,6 +12,9 @@ class NewEntryPage extends StatefulWidget {
 }
 
 class _NewEntryPageState extends State<NewEntryPage> {
+  final TextEditingController nameController = TextEditingController();
+  bool _isSelected = true;
+
   getDataFromFirestore() async {
     final firestoreInstance = FirebaseFirestore.instance;
     final result = await firestoreInstance
@@ -43,42 +46,67 @@ class _NewEntryPageState extends State<NewEntryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final phoneSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('New Entry'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          CupertinoSwitch(
-            value: true,
-            onChanged: (index) {},
-          ),
-          Switch(
-            value: true,
-            onChanged: (i) {},
-          ),
-          FlutterSwitch(
-            activeText: "All Good. Negative.",
-            inactiveText: "Under Quarantine.",
-            value: true,
-            valueFontSize: 10.0,
-            width: 110,
-            borderRadius: 30.0,
-            showOnOff: true,
-            onToggle: (val) {
-              // setState(() {
-              //   status6 = val;
-              // });
-            },
-          ),
-          TextButton(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Wrap(
+          runSpacing: 50,
+          alignment: WrapAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TextFormField(
+              controller: nameController,
+              decoration: InputDecoration(
+                icon: Icon(Icons.text_format),
+                labelText: 'Describe a name',
+                // labelStyle: theme.textTheme.headline1),
+              ),
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              controller: nameController,
+              decoration: InputDecoration(
+                icon: Icon(Icons.attach_money),
+                labelText: 'Enter to cost',
+                // labelStyle: theme.textTheme.headline1),
+              ),
+            ),
+            LabeledSwitch(
+              label: 'Status',
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              value: _isSelected,
+              onChanged: (bool newValue) {
+                setState(() {
+                  _isSelected = newValue;
+                });
+              },
+            ),
+            TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
+                minimumSize: MaterialStateProperty.all(
+                  Size(
+                    phoneSize.height * .1,
+                    phoneSize.width * .1,
+                  ),
+                ),
+              ),
+              child: Text(
+                'Save',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: () {
                 // getDataFromFirestore();
                 setDataToFirestore();
               },
-              child: Text("print"))
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

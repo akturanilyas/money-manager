@@ -1,4 +1,4 @@
-import 'package:bloctest/bloc/screen/bloc/bottom_navigation_bloc.dart';
+import 'package:bloctest/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:bloctest/bloc/test_bloc.dart';
 import 'package:bloctest/ui/new_entry_screen.dart';
 import 'package:bloctest/ui/root.dart';

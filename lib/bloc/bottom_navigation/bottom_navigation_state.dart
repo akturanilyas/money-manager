@@ -32,15 +32,6 @@ class SpendPageLoaded extends BottomNavigationState {
   String toString() => 'SpendingPageLoaded with text: $text';
 }
 
-class IncomePageLoaded extends BottomNavigationState {
-  IncomePageLoaded({required this.text});
-
-  final String text;
-
-  @override
-  String toString() => 'IncomePageLoaded with text: $text';
-}
-
 class AnalysisPageLoaded extends BottomNavigationState {
   AnalysisPageLoaded({required this.text});
 

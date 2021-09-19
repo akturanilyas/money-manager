@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class IncomeScreen extends StatefulWidget {
-  const IncomeScreen({Key? key}) : super(key: key);
+class AnalysisScreen extends StatefulWidget {
+  const AnalysisScreen({Key? key}) : super(key: key);
 
   @override
-  _IncomeScreenState createState() => _IncomeScreenState();
+  _AnalysisScreenState createState() => _AnalysisScreenState();
 }
 
-class _IncomeScreenState extends State<IncomeScreen> {
+class _AnalysisScreenState extends State<AnalysisScreen> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
