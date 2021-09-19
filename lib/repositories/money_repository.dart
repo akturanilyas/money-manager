@@ -22,7 +22,7 @@ class MoneyRepository {
           name, value, status, created, imageUrl);
       return true;
     } catch (e) {
-      print('Error: ' + e.toString());
+      print('Error : ' + e.toString());
       return false;
     }
   }

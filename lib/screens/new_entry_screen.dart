@@ -1,7 +1,7 @@
 import 'package:bloctest/bloc/firestore/firestore_bloc.dart';
+import 'package:bloctest/constants/theme.dart';
 import 'package:bloctest/widget/labeled_switch.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
@@ -16,25 +16,8 @@ class NewEntryPage extends StatefulWidget {
 class _NewEntryPageState extends State<NewEntryPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController valueController = TextEditingController();
-  bool _isSelected = true;
 
-  getDataFromFirestore() async {
-    final firestoreInstance = FirebaseFirestore.instance;
-    final result = await firestoreInstance
-        .collection("users")
-        .doc("1")
-        .collection('transfers')
-        .get()
-        .then(
-      (querySnapshot) {
-        querySnapshot.docs.forEach(
-          (result) {
-            print(result.data());
-          },
-        );
-      },
-    );
-  }
+  bool _isSelected = true;
 
   setDataToFirestore() {
     final firestoreInstance = FirebaseFirestore.instance;
@@ -52,6 +35,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
     final phoneSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ThemeConstants.primaryColor,
         title: Text('New Entry'),
         centerTitle: true,
       ),
@@ -91,14 +75,18 @@ class _NewEntryPageState extends State<NewEntryPage> {
             ),
             TextButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
-                minimumSize: MaterialStateProperty.all(
-                  Size(
-                    phoneSize.height * .1,
-                    phoneSize.width * .1,
+                  backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
+                  minimumSize: MaterialStateProperty.all(
+                    Size(
+                      phoneSize.height * .15,
+                      phoneSize.width * .12,
+                    ),
                   ),
-                ),
-              ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  )),
               child: Text(
                 'Save',
                 style: TextStyle(color: Colors.white),

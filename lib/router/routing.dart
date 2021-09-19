@@ -1,28 +1,24 @@
 import 'package:bloctest/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:bloctest/bloc/firestore/firestore_bloc.dart';
-import 'package:bloctest/bloc/test_bloc.dart';
 import 'package:bloctest/screens/new_entry_screen.dart';
 import 'package:bloctest/screens/root.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  final TestBloc _testBloc = TestBloc();
-
+  final BottomNavigationBloc _navbarBloc = BottomNavigationBloc();
+  final FirestoreBloc _firestoreBloc = FirestoreBloc();
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                value: _testBloc,
-              ),
               BlocProvider(
-                create: (context) => BottomNavigationBloc()..add(AppStarted()),
+                create: (context) => _navbarBloc..add(AppStarted()),
               ),
               BlocProvider.value(
-                value: FirestoreBloc(),
+                value: _firestoreBloc,
               ),
             ],
             child: Root(),
@@ -31,7 +27,7 @@ class AppRouter {
       case '/new':
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
-            value: FirestoreBloc(),
+            value: _firestoreBloc,
             child: NewEntryPage(),
           ),
         );
@@ -42,6 +38,7 @@ class AppRouter {
   }
 
   void dispose() {
-    _testBloc.close();
+    _firestoreBloc.close();
+    _navbarBloc.close();
   }
 }
