@@ -19,13 +19,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
 
   bool _isSelected = true;
   int selectedImage = 0;
-  List<AssetImage> images = [
-    ImageConstants.money,
-    ImageConstants.home,
-    ImageConstants.food,
-    ImageConstants.pet,
-    ImageConstants.shoe
-  ];
+
   @override
   Widget build(BuildContext context) {
     final phoneSize = MediaQuery.of(context).size;
@@ -60,7 +54,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                   minVerticalPadding: 20,
                   // TODO! add there if else block and if true show picture
                   leading: Image(
-                    image: images[selectedImage],
+                    image: ImageConstants.images[selectedImage],
                     color: ThemeConstants.selectedItemColor,
                     width: MediaQuery.of(context).size.width * .2,
                     height: MediaQuery.of(context).size.height * .1,
@@ -124,7 +118,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       });
                     },
                     child: Image(
-                      image: ImageConstants.money,
+                      image: ImageConstants.images[0],
                       color: selectedImage == 0
                           ? ThemeConstants.greenAccent
                           : ThemeConstants.selectedItemColor,
@@ -139,7 +133,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       });
                     },
                     child: Image(
-                      image: ImageConstants.home,
+                      image: ImageConstants.images[1],
                       color: selectedImage == 1
                           ? ThemeConstants.greenAccent
                           : ThemeConstants.selectedItemColor,
@@ -154,7 +148,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       });
                     },
                     child: Image(
-                      image: ImageConstants.food,
+                      image: ImageConstants.images[2],
                       color: selectedImage == 2
                           ? ThemeConstants.greenAccent
                           : ThemeConstants.selectedItemColor,
@@ -175,7 +169,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       });
                     },
                     child: Image(
-                      image: ImageConstants.pet,
+                      image: ImageConstants.images[3],
                       color: selectedImage == 3
                           ? ThemeConstants.greenAccent
                           : ThemeConstants.selectedItemColor,
@@ -190,7 +184,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       });
                     },
                     child: Image(
-                      image: ImageConstants.shoe,
+                      image: ImageConstants.images[4],
                       color: selectedImage == 4
                           ? ThemeConstants.greenAccent
                           : ThemeConstants.selectedItemColor,
@@ -223,13 +217,18 @@ class _NewEntryPageState extends State<NewEntryPage> {
               style: TextStyle(color: ThemeConstants.selectedItemColor),
             ),
             onPressed: () {
-              context.read<FirestoreBloc>().add(CreatedButtonTapped(
-                  created: DateTime.now(),
-                  // TODO! Refactor there
-                  image: selectedImage,
-                  name: nameController.text,
-                  status: _isSelected,
-                  value: double.parse(valueController.text)));
+              context.read<FirestoreBloc>().add(
+                    CreatedButtonTapped(
+                      created: DateTime.now(),
+                      // TODO! Refactor there
+                      image: selectedImage,
+                      name: nameController.text,
+                      status: _isSelected,
+                      value: double.parse(valueController.text),
+                    ),
+                  );
+              context.read<FirestoreBloc>().add(GetExchanges());
+              Navigator.pop(context);
             },
           ),
         ],

@@ -1,5 +1,8 @@
 import 'package:bloctest/bloc/firestore/firestore_bloc.dart';
+import 'package:bloctest/constants/image_constants.dart';
+import 'package:bloctest/constants/theme.dart';
 import 'package:bloctest/models/money_exchange_model.dart';
+import 'package:bloctest/utils/time_calculater.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,15 +36,47 @@ class _SpendScreenState extends State<SpendScreen> {
                 color: exchanges[index].status ? Colors.blueAccent : Colors.red,
                 elevation: 10,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      minVerticalPadding: 10,
-                      leading: Icon(Icons.album, size: 70),
-                      title: Text(exchanges[index].name,
-                          style: TextStyle(color: Colors.white, fontSize: 20)),
-                      subtitle: Text(exchanges[index].value.toString(),
-                          style: TextStyle(color: Colors.white, fontSize: 16)),
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                          child: Image(
+                            image:
+                                ImageConstants.images[exchanges[index].image],
+                            color: ThemeConstants.selectedItemColor,
+                            width: MediaQuery.of(context).size.width * .2,
+                            height: MediaQuery.of(context).size.height * .1,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(exchanges[index].name,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20)),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text('Value: ' + exchanges[index].value.toString(),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20)),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                                'Time: ' +
+                                    calculateTime(
+                                        exchanges[index].created.toString()),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16)),
+                          ],
+                        ),
+                        Flexible(child: Container())
+                      ],
                     ),
                     ButtonBar(
                       children: <Widget>[
