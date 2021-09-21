@@ -5,10 +5,10 @@ class MoneyExchangeRequest {
   final double value;
   final bool status;
   final DateTime created;
-  final String imageUrl;
+  final int image;
 
   MoneyExchangeRequest(
-      this.name, this.value, this.status, this.created, this.imageUrl);
+      this.name, this.value, this.status, this.created, this.image);
 
   Map<String, dynamic> toMap() {
     return {
@@ -16,7 +16,7 @@ class MoneyExchangeRequest {
       'value': value,
       'status': status,
       'created': created.millisecondsSinceEpoch,
-      'imageUrl': imageUrl,
+      'image': image,
     };
   }
 
@@ -26,7 +26,7 @@ class MoneyExchangeRequest {
       map['value'],
       map['status'],
       DateTime.fromMillisecondsSinceEpoch(map['created']),
-      map['imageUrl'],
+      map['image'],
     );
   }
 

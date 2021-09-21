@@ -12,14 +12,14 @@ class CreatedButtonTapped extends FirestoreEvent {
   final double value;
   final bool status;
   final DateTime created;
-  final String imageUrl;
+  final int image;
 
   CreatedButtonTapped({
     required this.name,
     required this.value,
     required this.status,
     required this.created,
-    required this.imageUrl,
+    required this.image,
   });
   @override
   String toString() => 'Name: $name, value: $value, status: $status';

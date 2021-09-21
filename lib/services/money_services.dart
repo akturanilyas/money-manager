@@ -36,10 +36,10 @@ class MoneyService {
   }
 
   Future<void> createExchange(String name, double value, bool status,
-      DateTime created, String imageUrl) async {
+      DateTime created, int image) async {
     final firestoreInstance = FirebaseFirestore.instance;
     MoneyExchangeRequest test =
-        MoneyExchangeRequest(name, value, status, created, imageUrl);
+        MoneyExchangeRequest(name, value, status, created, image);
     //TODO! id must be implement
     final String userId = '1';
     await firestoreInstance

@@ -1,15 +1,17 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 class MoneyExchange {
   final String id;
   final String name;
   final double value;
   final bool status;
   final DateTime created;
-  final String imageUrl;
+  final int image;
 
   MoneyExchange(
-      this.id, this.name, this.value, this.status, this.created, this.imageUrl);
+      this.id, this.name, this.value, this.status, this.created, this.image);
 
   Map<String, dynamic> toMap() {
     return {
@@ -18,7 +20,7 @@ class MoneyExchange {
       'value': value,
       'status': status,
       'created': created.millisecondsSinceEpoch,
-      'imageUrl': imageUrl,
+      'image': image,
     };
   }
 
@@ -29,7 +31,7 @@ class MoneyExchange {
       map['value'],
       map['status'],
       DateTime.fromMillisecondsSinceEpoch(map['created']),
-      map['imageUrl'],
+      map['image'],
     );
   }
 

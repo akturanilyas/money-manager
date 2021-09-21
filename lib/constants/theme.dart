@@ -6,4 +6,5 @@ class ThemeConstants {
   static const secondaryColor = Colors.white54;
   static const selectedItemColor = Colors.white;
   static const ktuLightBlue = const Color(0xFF005AA9);
+  static const greenAccent = Colors.greenAccent;
 }

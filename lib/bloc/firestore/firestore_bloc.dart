@@ -27,8 +27,8 @@ class FirestoreBloc extends Bloc<FirestoreEvent, FirestoreState> {
       //   yield Error();
       // }
     } else if (event is CreatedButtonTapped) {
-      if (await moneyRepository.createExchange(event.name, event.value,
-          event.status, event.created, event.imageUrl)) {
+      if (await moneyRepository.createExchange(
+          event.name, event.value, event.status, event.created, event.image)) {
         yield SuccessfullySaved();
       } else {
         yield Error();
